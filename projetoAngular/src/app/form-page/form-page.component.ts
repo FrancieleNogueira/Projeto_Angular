@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPageComponent implements OnInit {
 
+  public formTitle: string;
+  public formDescription: string;
+  public email: string ;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.formTitle = "Pagina Form";
+    this.formDescription = "Descricao depois de iniciar o componente";
   }
 
 }
