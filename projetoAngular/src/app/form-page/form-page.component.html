@@ -3,11 +3,23 @@
 <p> {{ formDescription }} </p>
 
 
-<p>Digite seu email:</p>
+<p>Digite seus emails:</p>
 
 <div class="input-group mb-3">
-    <input type="text" [(ngModel)]="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <span class="input-group-text" id="basic-addon2">@example.com</span>
+    <input type="text" [(ngModel)]="emails" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2" value=""> @example.com</span>
+    </div>
 </div>
 
-<p *ngIf="email"> {{ email }} @example.com</p>
+
+<p *ngIf="emails"> {{ emails }} @example.com</p>
+
+<button type="button" class="btn btn-primary" (click)="adicionarEmails()">Adicionar e-mails</button>
+
+<div *ngIf="emailsLocal.length">
+    <p>Lista de emails</p>
+    <ul>
+        <li *ngFor="let item of emailsLocal">{{ item }}</li>
+    </ul>
+</div>

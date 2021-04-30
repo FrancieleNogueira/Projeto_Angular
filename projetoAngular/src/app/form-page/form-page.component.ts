@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailService } from '../service/email.service';
 
 @Component({
   selector: 'app-form-page',
@@ -9,13 +10,24 @@ export class FormPageComponent implements OnInit {
 
   public formTitle: string;
   public formDescription: string;
-  public email: string ;
+  public emails: string;
 
-  constructor() { }
+  public emailsLocal = [];
+
+  constructor(private emailService: EmailService) {
+    this.emailsLocal = emailService.emails;
+   }
+    
 
   ngOnInit(): void {
     this.formTitle = "Pagina Form";
     this.formDescription = "Descricao depois de iniciar o componente";
+  }
+
+  public adicionarEmails(){
+    if (this.emails) {
+     this.emailService.emails.push(this.emails);  
+    }
   }
 
 }

@@ -1,0 +1,24 @@
+<h1>{{ titulo }}</h1>
+
+<p>{{ descricao }}</p>
+
+<hr>
+
+<div class="input-group">
+    <input type="number" class="form-control small" placeholder="digite um número" [(ngModel)]='n1'>
+
+
+    <button class="btn btn-outline-secondary" type="button" id="btn-somar" (click)="getOperador('+')" value="+">+</button>
+    <button class="btn btn-outline-secondary" type="button" id="btn-subtrair" (click)="getOperador('-')" value="-">-</button>
+    <button class="btn btn-outline-secondary" type="button" id="btn-dividir" (click)="getOperador('/')" value="/">/</button>
+    <button class="btn btn-outline-secondary" type="button" id="btn-multiplicar" (click)="getOperador('*')" value="">x</button>
+
+
+    <input type="number" class="form-control" placeholder="digite um número" [(ngModel)]='n2'>
+
+
+    <button type="submit" class="btn btn-primary" (click)="calcular()">Calcular</button>
+
+    <input type="number" class="form-control" disabled placeholder="{{resultado}}">
+
+</div>
