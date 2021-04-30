@@ -4,8 +4,8 @@
 
 <hr>
 
-<div class="input-group">
-    <input type="number" class="form-control small" placeholder="digite um número" [(ngModel)]='n1'>
+<div>
+    <input type="number" class="form-control small" placeholder="Por favor digite um número:" [(ngModel)]='n1'>
 
 
     <button class="btn btn-outline-secondary" type="button" id="btn-somar" (click)="getOperador('+')" value="+">+</button>
@@ -14,11 +14,26 @@
     <button class="btn btn-outline-secondary" type="button" id="btn-multiplicar" (click)="getOperador('*')" value="">x</button>
 
 
-    <input type="number" class="form-control" placeholder="digite um número" [(ngModel)]='n2'>
+    <input type="number" class="form-control" placeholder="Por favor digite outro número:" [(ngModel)]='n2'>
 
 
-    <button type="submit" class="btn btn-primary" (click)="calcular()">Calcular</button>
+    <button type="button" class="btn btn-outline-danger" (click)="calcular()">Calcular</button>
 
     <input type="number" class="form-control" disabled placeholder="{{resultado}}">
 
+</div>
+<div class="input-group">
+    <button type="submit" class="btn btn-danger btn-sm" (click)="limparValores()">Limpar Valores</button>
+</div>
+
+
+<hr>
+<p *ngIf="n1 || operador || n2"> {{ n1 }} {{operador}} {{ n2 }} = {{ resultado }}</p>
+<hr>
+
+<div class="col margin" *ngIf="contas.length">
+    <p> Histórico de Contas </p>
+    <ol class="list-group">
+        <li class="list-group-item" *ngFor="let conta of contas">{{ conta }}</li>
+    </ol>
 </div>

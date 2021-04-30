@@ -5,8 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CalculadoraService {
 
-  calculos = [];
-
+  public contas = [];
   constructor() { }
 
   somar(a, b) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalculadoraService } from '../service/calculadora.service';
 
 @Component({
   selector: 'app-calculadora',
@@ -7,38 +8,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculadoraComponent implements OnInit {
 
-  titulo = 'Calculadora';
-  descricao = 'Digite um numero, escolha a operação, clique em Calcular e confira o resultado:';
+  titulo: string;
+  descricao: string;
   n1: number;
   n2: number;
   operador: string;
-  resultado: number;  
+  resultado: number;
+  contas = [];
 
-  constructor() { }
+  constructor(private calculadoraService: CalculadoraService) { 
+    this.contas = calculadoraService.contas;
+  }
 
   ngOnInit(): void {
+    this.titulo = 'Calculadora';
+    this.descricao = 'Digite os valores, escolha a operação, clique em Calcular e veja o resultado!';
   }
 
   getOperador(operador) {
     this.operador = operador;
-    console.log(operador);
   }
 
   calcular() {
+    let isValido = true;
+    // validar as entradas
+    if(this.n1 === undefined || this.n2 === undefined) {
+      alert('Por favor digite os dois valores para poder calcular.');
+      isValido = false;
+    } else if(this.operador == '/' && this.n2 == 0) {
+      alert('Não pode fazer divisão por 0. Por favor digite outro valor.');
+      isValido = false;
+    } else if (this.operador == undefined) {
+      alert('Por Favor clique em um operador.');
+      isValido = false;
+    } 
+
+    if(isValido) {
+      // calcular
     switch(this.operador) {
       case '+' :
-        this.resultado = this.n1 + this.n2;
+        this.resultado = this.calculadoraService.somar(this.n1, this.n2);
         break;
       case '-' :
-        this.resultado = this.n1 - this.n2;
+        this.resultado = this.calculadoraService.subtrair(this.n1, this.n2);
         break;
       case '/' :
-        this.resultado = this.n1 / this.n2;
+        this.resultado = this.calculadoraService.dividir(this.n1, this.n2);
         break;
       case '*' :
-        this.resultado = this.n1 * this.n2;
+        this.resultado = this.calculadoraService.multiplicar(this.n1, this.n2);
         break;
     }
-    return this.resultado;
+   
+    this.calculadoraService.contas.push(this.n1 + ' ' + this.operador + ' ' + this.n2 + ' = ' + this.resultado);
+
+    
+    this.calculadoraService.contas.reverse();
+    }
+  }
+
+  limparValores() {
+    this.n1 = undefined;
+    this.n2 = undefined;
+    this.operador = '';
+    this.resultado = undefined;
   }
 }
